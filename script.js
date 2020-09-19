@@ -22,10 +22,7 @@ function writePassword() {
   // Prompts for password criteria
   askPasswordLength();
 
-  askLowerCase();
-  askUpperCase();
-  askNumbers();
-  askSpecialChar();
+  validateCharacterTypes();
 
   //   passwordText.value = password;
 }
@@ -39,7 +36,7 @@ function characterCodes(min, max) {
   return array;
 }
 
-// Password length prompt function
+// Password length prompt
 function askPasswordLength() {
   var validLength = false;
   while (validLength === false) {
@@ -54,14 +51,17 @@ function askPasswordLength() {
   }
 }
 
-// Lowercase type prompt function
+// Lowercase type prompt
 function askLowerCase() {
   var validLowerCase = false;
   while (validLowerCase === false) {
     var lowerCaseType = prompt(
       "Do you want to include lowercase characters? (Yes or No)"
     );
-    if (lowerCaseType === "Yes" || lowerCaseType === "No") {
+    if (lowerCaseType === "Yes") {
+      characterTypeChosen++;
+      validLowerCase = true;
+    } else if (lowerCaseType === "No") {
       validLowerCase = true;
     } else {
       alert('you must choose "Yes" or "No"');
@@ -69,14 +69,17 @@ function askLowerCase() {
   }
 }
 
-// Uppercase type prompt function
+// Uppercase type prompt
 function askUpperCase() {
   var validUpperCase = false;
   while (validUpperCase === false) {
     var upperCaseType = prompt(
       "Do you want to include uppercase characters? (Yes or No)"
     );
-    if (upperCaseType === "Yes" || upperCaseType === "No") {
+    if (upperCaseType === "Yes") {
+      characterTypeChosen++;
+      validUpperCase = true;
+    } else if (upperCaseType === "No") {
       validUpperCase = true;
     } else {
       alert('you must choose "Yes" or "No"');
@@ -84,12 +87,15 @@ function askUpperCase() {
   }
 }
 
-// Numeric type prompt function
+// Numeric type prompt
 function askNumbers() {
   var validNumbers = false;
   while (validNumbers === false) {
     var numbersType = prompt("Do you want to include numbers? (Yes or No)");
-    if (numbersType === "Yes" || numbersType === "No") {
+    if (numbersType === "Yes") {
+      characterTypeChosen++;
+      validNumbers = true;
+    } else if (numbersType === "No") {
       validNumbers = true;
     } else {
       alert('you must choose "Yes" or "No"');
@@ -97,17 +103,36 @@ function askNumbers() {
   }
 }
 
-// Special Characters type prompt function
+// Special Characters type prompt
 function askSpecialChar() {
   var validSpecial = false;
   while (validSpecial === false) {
     var specialType = prompt(
       "Do you want to include special characters? (Yes or No)"
     );
-    if (specialType === "Yes" || specialType === "No") {
+    if (specialType === "Yes") {
+      characterTypeChosen++;
+      validSpecial = true;
+    } else if (specialType === "No") {
       validSpecial = true;
     } else {
       alert('you must choose "Yes" or "No"');
+    }
+  }
+}
+var characterTypeChosen = 0;
+// Validate at least one character type
+function validateCharacterTypes() {
+  var atLeastOneCharacterType = false;
+  while (atLeastOneCharacterType === false) {
+    askLowerCase();
+    askUpperCase();
+    askNumbers();
+    askSpecialChar();
+    if (characterTypeChosen > 0) {
+      atLeastOneCharacterType = true;
+    } else {
+      alert("At least one character type must be chosen");
     }
   }
 }
