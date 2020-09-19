@@ -20,13 +20,8 @@ function writePassword() {
   // var passwordText = document.querySelector("#password");
 
   // Prompts for password criteria
-  var minCharacters = prompt(
-    "What is the minimum number of characters for you password?"
-  );
+  askPasswordLength();
 
-  var maxCharacters = prompt(
-    "What is the maximum number of characters for you password?"
-  );
   var characterTypes = prompt(
     "What character types are used for your password? (Please enter lowercase, uppercase, numeric, and/or special characters)"
   );
@@ -41,6 +36,21 @@ function characterCodes(min, max) {
     array.push(i);
   }
   return array;
+}
+
+// Password length prompt function
+function askPasswordLength() {
+  var validLength = false;
+  while (validLength === false) {
+    var characterLength = prompt(
+      "How many characters are in your password (minimum of 8 characters with a maximum of 128 characters)?"
+    );
+    if (parseInt(characterLength) >= 8 && parseInt(characterLength) <= 128) {
+      validLength = true;
+    } else {
+      alert("you must choose a valid character length");
+    }
+  }
 }
 
 // Validate input
