@@ -10,16 +10,29 @@ var SymbolCharCodes = characterCodes(33, 47)
   .concat(characterCodes(91, 96))
   .concat(characterCodes(123, 126));
 
+// When you click on "Generate Button", password generating function launches
+generateBtn.addEventListener("click", writePassword);
+
+// Main password generator function
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  // var password = generatePassword();
+  // var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  // Prompts for password criteria
+  var minCharacters = prompt(
+    "What is the minimum number of characters for you password?"
+  );
+
+  var maxCharacters = prompt(
+    "What is the maximum number of characters for you password?"
+  );
+  var characterTypes = prompt(
+    "What character types are used for your password? (Please enter lowercase, uppercase, numeric, and/or special characters)"
+  );
+
+  //   passwordText.value = password;
 }
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
 
 // Function to create arrays of potential charcters from ASCII character codes
 function characterCodes(min, max) {
@@ -29,23 +42,6 @@ function characterCodes(min, max) {
   }
   return array;
 }
-
-// When clicked on password, prompts open
-
-// Prompt "What is the minimum amount of characters"
-var minCharacters = prompt(
-  "What is the minimum number of characters for you password?"
-);
-
-// Prompt "What is the maximum amount of characters"
-var maxCharacters = prompt(
-  "What is the maximum number of characters for you password?"
-);
-// Prompt "What characte types to include in the password"
-// Choose lowercase, uppercase, numeric, and/or special characters
-var characterTypes = prompt(
-  "What character types are used for your password? (Please enter lowercase, uppercase, numeric, and/or special characters)"
-);
 
 // Validate input
 
