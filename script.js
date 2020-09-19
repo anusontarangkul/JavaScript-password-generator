@@ -15,11 +15,18 @@ generateBtn.addEventListener("click", writePassword);
 // When clicked on password, prompts open
 
 // Prompt "What is the minimum amount of characters"
-
+var minCharacters = prompt(
+  "What is the minimum number of characters for you password?"
+);
 // Prompt "What is the maximum amount of characters"
-
+var maxCharacters = prompt(
+  "What is the maximum number of characters for you password?"
+);
 // Prompt "What characte types to include in the password"
 // Choose lowercase, uppercase, numeric, and/or special characters
+var characterTypes = prompt(
+  "What character types are used for your password? (Please enter lowercase, uppercase, numeric, and/or special characters)"
+);
 
 // Validate input
 
