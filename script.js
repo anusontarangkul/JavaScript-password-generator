@@ -22,9 +22,7 @@ function writePassword() {
   // Prompts for password criteria
   askPasswordLength();
 
-  var characterTypes = prompt(
-    "What character types are used for your password? (Please enter lowercase, uppercase, numeric, and/or special characters)"
-  );
+  askLowerCase();
 
   //   passwordText.value = password;
 }
@@ -43,12 +41,27 @@ function askPasswordLength() {
   var validLength = false;
   while (validLength === false) {
     var characterLength = prompt(
-      "How many characters are in your password (minimum of 8 characters with a maximum of 128 characters)?"
+      "How many characters are in your password? (minimum of 8 characters with a maximum of 128 characters)"
     );
     if (parseInt(characterLength) >= 8 && parseInt(characterLength) <= 128) {
       validLength = true;
     } else {
       alert("you must choose a valid character length");
+    }
+  }
+}
+
+// Character type prompt function
+function askLowerCase() {
+  var validLowerCase = false;
+  while (validLowerCase === false) {
+    var lowerCaseType = prompt(
+      "Do you want to include lowercase characters? (Yes or No)"
+    );
+    if (lowerCaseType === "Yes" || lowerCaseType === "No") {
+      validLowerCase = true;
+    } else {
+      alert('you must choose "Yes" or "No"');
     }
   }
 }
