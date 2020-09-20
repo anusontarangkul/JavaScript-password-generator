@@ -8,6 +8,8 @@ var includeUpperCase = false;
 var includeNumbers = false;
 var includeSpecial = false;
 var finalPassword = "";
+//keep track that at least one character type was chosen
+var characterTypeChosen = 0;
 
 // array variables to hold potential characters (using ascii codes)
 var upperCaseCharCodes = characterCodes(65, 90);
@@ -22,12 +24,7 @@ var symbolCharCodes = characterCodes(33, 47)
 generateBtn.addEventListener("click", writePassword);
 
 // Main password generator function
-// Write password to the #password input
 function writePassword() {
-  // var password = generatePassword();
-  // var passwordText = document.querySelector("#password");
-
-  // Prompts for password criteria
   askPasswordLength();
   validateCharacterTypes();
   generatePassword(
@@ -38,7 +35,6 @@ function writePassword() {
     includeSpecial
   );
   displayPassword();
-  //   passwordText.value = password;
 }
 
 // Function to create arrays of potential charcters from ASCII character codes
@@ -140,8 +136,6 @@ function askSpecialChar() {
   }
 }
 
-// Variable to keep track of how many character types chosen
-var characterTypeChosen = 0;
 // Validate at least one character type
 function validateCharacterTypes() {
   var atLeastOneCharacterType = false;
@@ -158,8 +152,7 @@ function validateCharacterTypes() {
   }
 }
 
-// Password is generated
-
+// Password generating function
 function generatePassword(
   characterAmount,
   includeLowerCase,
@@ -185,12 +178,10 @@ function generatePassword(
     var characterCode = charCodes[Math.floor(Math.random() * charCodes.length)];
     passwordCharacters.push(String.fromCharCode(characterCode));
   }
-  // console.log(passwordCharacters.join(""));
   finalPassword = passwordCharacters.join("");
-  // console.log(finalPassword);
 }
 
-// Password is displayed
+// Display password
 function displayPassword() {
   var passwordText = document.querySelector("#password");
   passwordText.textContent = finalPassword;
