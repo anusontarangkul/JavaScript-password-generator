@@ -1,11 +1,18 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+// empty parameter variables for generating password
+var characterAmount = 0;
+var includeLowerCase = false;
+var includeUpperCase = false;
+var includeNumbers = false;
+var includeSpecial = false;
+
 // array variables to hold potential characters (using ascii codes)
-var UpperCaseCharCodes = characterCodes(65, 90);
-var LowerCaseCharCodes = characterCodes(97, 122);
-var NumberCharCodes = characterCodes(48, 57);
-var SymbolCharCodes = characterCodes(33, 47)
+var upperCaseCharCodes = characterCodes(65, 90);
+var lowerCaseCharCodes = characterCodes(97, 122);
+var numberCharCodes = characterCodes(48, 57);
+var symbolCharCodes = characterCodes(33, 47)
   .concat(characterCodes(58, 64))
   .concat(characterCodes(91, 96))
   .concat(characterCodes(123, 126));
@@ -21,8 +28,14 @@ function writePassword() {
 
   // Prompts for password criteria
   askPasswordLength();
-
   validateCharacterTypes();
+  generatePassword(
+    characterAmount,
+    includeLowerCase,
+    includeUpperCase,
+    includeNumbers,
+    includeSpecial
+  );
 
   //   passwordText.value = password;
 }
@@ -44,6 +57,7 @@ function askPasswordLength() {
       "How many characters are in your password? (minimum of 8 characters with a maximum of 128 characters)"
     );
     if (parseInt(characterLength) >= 8 && parseInt(characterLength) <= 128) {
+      characterAmount = characterLength;
       validLength = true;
     } else {
       alert("you must choose a valid character length");
@@ -60,6 +74,7 @@ function askLowerCase() {
     );
     if (lowerCaseType === "Yes") {
       characterTypeChosen++;
+      includeLowerCase = true;
       validLowerCase = true;
     } else if (lowerCaseType === "No") {
       validLowerCase = true;
@@ -78,6 +93,7 @@ function askUpperCase() {
     );
     if (upperCaseType === "Yes") {
       characterTypeChosen++;
+      includeUpperCase = true;
       validUpperCase = true;
     } else if (upperCaseType === "No") {
       validUpperCase = true;
@@ -94,6 +110,7 @@ function askNumbers() {
     var numbersType = prompt("Do you want to include numbers? (Yes or No)");
     if (numbersType === "Yes") {
       characterTypeChosen++;
+      includeNumbers = true;
       validNumbers = true;
     } else if (numbersType === "No") {
       validNumbers = true;
@@ -112,6 +129,7 @@ function askSpecialChar() {
     );
     if (specialType === "Yes") {
       characterTypeChosen++;
+      includeSpecial = true;
       validSpecial = true;
     } else if (specialType === "No") {
       validSpecial = true;
@@ -120,6 +138,8 @@ function askSpecialChar() {
     }
   }
 }
+
+// Variable to keep track of how many character types chosen
 var characterTypeChosen = 0;
 // Validate at least one character type
 function validateCharacterTypes() {
@@ -137,8 +157,36 @@ function validateCharacterTypes() {
   }
 }
 
-// Validate input
-
 // Password is generated
+
+function generatePassword(
+  characterAmount,
+  includeLowerCase,
+  includeUpperCase,
+  includeNumbers,
+  includeSpecial
+) {
+  let charCodes = [];
+  if (includeLowerCase) {
+    charCodes = charCodes.concat(lowerCaseCharCodes);
+  }
+  if (includeUpperCase) {
+    charCodes = charCodes.concat(upperCaseCharCodes);
+  }
+  if (includeNumbers) {
+    charCodes = charCodes.concat(numberCharCodes);
+  }
+  if (includeSpecial) {
+    charCodes = charCodes.concat(symbolCharCodes);
+  }
+  var passwordCharacters = [];
+  for (var i = 0; i < characterAmount; i++) {
+    var characterCode = charCodes[Math.floor(Math.random() * charCodes.length)];
+    passwordCharacters.push(String.fromCharCode(characterCode));
+  }
+  // console.log(passwordCharacters.join(""));
+  var finalPassword = passwordCharacters.join("");
+  console.log(finalPassword);
+}
 
 // Password is displayed
