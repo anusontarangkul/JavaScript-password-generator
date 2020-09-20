@@ -1,12 +1,13 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// empty parameter variables for generating password
+// empty variables for generating password
 var characterAmount = 0;
 var includeLowerCase = false;
 var includeUpperCase = false;
 var includeNumbers = false;
 var includeSpecial = false;
+var finalPassword = "";
 
 // array variables to hold potential characters (using ascii codes)
 var upperCaseCharCodes = characterCodes(65, 90);
@@ -36,7 +37,7 @@ function writePassword() {
     includeNumbers,
     includeSpecial
   );
-
+  displayPassword();
   //   passwordText.value = password;
 }
 
@@ -185,8 +186,12 @@ function generatePassword(
     passwordCharacters.push(String.fromCharCode(characterCode));
   }
   // console.log(passwordCharacters.join(""));
-  var finalPassword = passwordCharacters.join("");
-  console.log(finalPassword);
+  finalPassword = passwordCharacters.join("");
+  // console.log(finalPassword);
 }
 
 // Password is displayed
+function displayPassword() {
+  var passwordText = document.querySelector("#password");
+  passwordText.textContent = finalPassword;
+}
